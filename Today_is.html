@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Date Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 350px;
+            width: 400px;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 32px;
+            cursor: pointer;
+            background-color: #FFEB3B; /* Bright Yellow */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #FDD835; /* Slightly darker yellow on hover */
+        }
+        p {
+            font-size: 36px;
+            color: #333;
+            margin-top: 30px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .not {
+            color: red;
+            font-weight: bold;
+        }
+        .dumindu {
+            font-size: 24px;
+            color: blue;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="generateRandomDate()">Today is</button>
+        <p id="message">What's today?</p>
+        <p id="dumindu" class="dumindu">dumindu</p> <!-- The "dumindu" text -->
+    </div>
+
+    <script>
+        function generateRandomDate() {
+            // Generate a random date between 1970 and 2025
+            const start = new Date(1970, 0, 1);
+            const end = new Date(2025, 11, 31);
+            const randomTime = Math.floor(Math.random() * (end - start + 1)) + start.getTime();
+            const randomDate = new Date(randomTime);
+
+            // Format the random date
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const randomDateFormatted = randomDate.toLocaleDateString('en-US', options);
+
+            // Display the message with 'not' in red and bold, and remove extra text
+            document.getElementById('message').innerHTML = `<span class="not">Not</span> ${randomDateFormatted}`;
+        }
+
+        let keysPressed = {}; // To track keys being pressed
+
+        // Detect keydown event
+        window.addEventListener('keydown', function(event) {
+            keysPressed[event.key] = true; // Mark key as pressed
+
+            // Check if both C and R are pressed
+            if (keysPressed['c'] && keysPressed['r']) {
+                document.getElementById('dumindu').style.display = 'block'; // Show "dumindu"
+            }
+        });
+
+        // Detect keyup event
+        window.addEventListener('keyup', function(event) {
+            keysPressed[event.key] = false; // Mark key as released
+
+            // Check if either C or R is released, hide "dumindu"
+            if (!keysPressed['c'] || !keysPressed['r']) {
+                document.getElementById('dumindu').style.display = 'none'; // Hide "dumindu"
+            }
+        });
+    </script>
+</body>
+</html>
