@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book of Answers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        #answer {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 70%;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Book of Answers!</h1>
+        <p>Type your question below and get a random answer:</p>
+        
+        <!-- Input for the question -->
+        <input type="text" id="question" placeholder="Ask me anything!" />
+
+        <!-- Button to get the answer -->
+        <button class="button" onclick="getAnswer()">Ask Question</button>
+
+        <!-- Display answer -->
+        <div id="answer"></div>
+    </div>
+
+    <script>
+        // Array of possible answers
+        const answers = [
+            "Yes, but only if you wear a hat.",
+            "Absolutely, after you complete a dance move.",
+            "I’m not sure, let’s ask the ducks.",
+            "It’s complicated. Consult the magic 8-ball.",
+            "The stars say yes, but the WiFi disagrees.",
+            "Why not? The universe is full of possibilities!",
+            "Only if you’ve had enough coffee today."
+        ];
+
+        // Function to get a random answer and display it
+        function getAnswer() {
+            // Get the question from the input field
+            const question = document.getElementById("question").value;
+
+            // Check if the user entered something
+            if (question.trim() === "") {
+                document.getElementById("answer").innerText = "Please enter a question!";
+                return;
+            }
+
+            // Get a random answer from the array
+            const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+
+            // Display the answer
+            document.getElementById("answer").innerText = `Your Question: "${question}"\nAnswer: ${randomAnswer}`;
+        }
+    </script>
+</body>
+</html>
